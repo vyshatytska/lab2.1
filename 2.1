@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace lab2._1
+{
+    /*Написати програму, яка за допомогою генератора випадкових чисел формує вказаний
+масив – такий, що значення його елементів належать заданому діапазону.Обчислити
+кількість та суму тих елементів, які задовольняють вказаному критерію; а також замінити
+нулями ці елементи.*/
+    /*Діапазон значень елементів масиву: (-10,...,14)
+    Одновимірний масив p із 24 елементів цілого типу.
+    Критерій – всі додатні або парними індексами.*/
+    class Program
+    {
+        static void Main()
+        {
+            Random rnd = new Random();
+            const int n = 24;
+            int[] p = new int[n];
+
+            int low = -10;
+            int high = 14;
+
+            for (int i = 0; i < n; i++)
+                p[i] = -10 + rnd.Next() % (14 - (-10) + 1);
+
+            Console.Write("p[] = {");
+            int s = 0;
+            for (int i = 0; i < n; i++)
+            {
+                if ((p[i] >= 0) || (i % 2 == 0))
+                    s++;
+                else
+                    continue;
+
+                Console.Write($"{s} , ");
+
+            }
+            Console.WriteLine("}");
+            Console.WriteLine();
+
+            int S = 0;
+            int k = 0;
+
+            for (int i = 0; i < n; i++)
+                if (p[i] >= 0 || i % 2 == 0)
+                {
+                    S += p[i];
+                    k++;
+                    p[i] = 0;
+                }
+
+            Console.WriteLine($"Number = {k}");
+            Console.WriteLine($"Sum = {S}");
+            Console.WriteLine();
+            Console.Write("a[] = {");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{p[i]} , ");
+            }
+            Console.WriteLine("}");
+            Console.WriteLine();
+
+        }
+    }
+}
